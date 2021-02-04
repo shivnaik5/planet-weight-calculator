@@ -1,17 +1,14 @@
 use std::io;
+use std::env;
+use serde_json::{Value, Error};
+
+mod cli;
+mod json;
 
 fn main() {
-    println!("Enter weight: ");
+    let args = cli::get_args();
+    println!("{} {}", args.weight, args.planet);
 
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-
-    let weight: f32 = input.trim().parse().unwrap();
-    let mars_weight = calculate_weight_on_mars(weight);
-
-    println!("Weight on Mars: {} kg", mars_weight);
-}
-
-fn calculate_weight_on_mars(weight: f32) -> f32 {
-    (weight / 9.81) * 3.711
+    let planets: Value = json::read_json();
+    println!("{}", planets);
 }

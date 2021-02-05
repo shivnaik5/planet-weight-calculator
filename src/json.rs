@@ -1,13 +1,10 @@
 use std::fs::File;
-use std::io::Read;
-// use serde_json::value::Value;
-use serde_json::Result;
-use serde_json::{Value, Error};
+use serde_json::{Result, Value, Error}; 
 
-pub fn read_json() -> Result<Value, Error> {
-    let mut file = File::open("src/planet_conversions.json").unwrap();
+pub fn read_json(file_name: String) -> Result<Value> {
+    let file = File::open(file_name).unwrap();
     let data: Value = serde_json::from_reader(file)
-        .expect("File should be proper JSON");
+        .expect("File should be proper JSON!");
 
-    Ok(data);
+    Ok(data)
 }

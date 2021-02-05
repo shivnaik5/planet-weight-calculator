@@ -1,15 +1,14 @@
-fn convert_weight() {
-    println!("Enter weight: ");
+pub fn calculate_weight_on_planet(planet: String, weight: f32, gravity: f32) {
+    let weight_on_planet = convert_weight(weight, gravity);
+    let weight_in_lbs = convert_kg_to_lbs(weight_on_planet);
 
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-
-    let weight: f32 = input.trim().parse().unwrap();
-    let mars_weight = calculate_weight_on_mars(weight);
-
-    println!("Weight on Mars: {} kg", mars_weight);
+    println!("The weight on {} is {} kg, or {} lbs!", planet, weight_on_planet, weight_in_lbs);
 }
 
-fn calculate_weight_on_mars(weight: f32) -> f32 {
-    (weight / 9.81) * 3.711
+fn convert_weight(weight: f32, conversion: f32) -> f32 {
+    (weight / 9.81) * conversion
 }
+
+fn convert_kg_to_lbs(weight: f32) -> f32 {
+    weight * 2.20462
+} 
